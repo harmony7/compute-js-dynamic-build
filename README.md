@@ -1,2 +1,2 @@
 # compute-js-dynamic-build
-Dynamically build JavaScript modules for Fastly Compute
+Dynamically build and load JavaScript modules for Fastly Compute
