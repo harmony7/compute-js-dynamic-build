@@ -7,4 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+## [0.1.0] - 2025-11-25
+
 Initial release
+
+[unreleased]: https://github.com/harmony7/compute-js-dynamic-build/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/harmony7/compute-js-dynamic-build/releases/tag/v0.1.0
