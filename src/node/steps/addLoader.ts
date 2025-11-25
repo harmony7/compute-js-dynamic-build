@@ -4,16 +4,21 @@ import esbuild, { type Plugin } from 'esbuild';
 
 import { filePipeline } from "@h7/js-async-pipeline";
 
+export type AddLoaderParams = {
+  minify?: boolean,
+};
+
 export async function addLoader(
   infile: string,
   outfile: string,
+  params?: AddLoaderParams,
 ) {
   await filePipeline(
     infile,
     outfile,
     [
       wrapTopLevel,
-      wrapLoader,
+      (infile, outfile) => wrapLoader(infile, outfile, { minify: params?.minify }),
     ]
   )
 }
