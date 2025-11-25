@@ -9,6 +9,7 @@ export async function bundleWithHttpImports(
     entryPoints: [ infile ],
     bundle: true,
     outfile,
+    conditions: [ 'fastly' ],
     plugins: [
       httpImportEsbuildPlugin({
         onLog(m) { console.log(m); }
