@@ -65,9 +65,7 @@ function wrapTopLevelPlugin(opts: WrapTopLevelPluginParams) {
         return null;
       });
       build.onLoad({ filter: /.*/, namespace }, (args) => {
-        // Generate a JS wrapper that imports the real entry
-        // This swallows the top level exports for the entry file
-        // and runs any side effects, such as addEventListener().
+        // Generate a default function wrapper that imports the real entry.
         return {
           contents: `\
 export default async function() { 
