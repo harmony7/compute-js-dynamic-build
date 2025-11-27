@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+## [0.2.1] - 2025-11-27
+
 ### Enhancements
 
 - Set process.env.NODE_ENV to "production" by default, can be unset using "prodModules" flag
@@ -31,7 +33,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Initial release
 
-[unreleased]: https://github.com/harmony7/compute-js-dynamic-build/compare/v0.2.0...HEAD
+[unreleased]: https://github.com/harmony7/compute-js-dynamic-build/compare/v0.2.1...HEAD
+[0.2.1]: https://github.com/harmony7/compute-js-dynamic-build/compare/v0.2.0...v0.2.1
 [0.2.0]: https://github.com/harmony7/compute-js-dynamic-build/compare/v0.1.1...v0.2.0
 [0.1.1]: https://github.com/harmony7/compute-js-dynamic-build/compare/v0.1.0...v0.1.1
 [0.1.0]: https://github.com/harmony7/compute-js-dynamic-build/releases/tag/v0.1.0
