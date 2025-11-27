@@ -9,6 +9,7 @@ import { filePipeline } from '@h7/js-async-pipeline';
 import { importMapEsbuildPlugin, ImportMap } from "@h7/importmap-esbuild-plugin";
 
 export type FastlyBuildParams = {
+  prodModules?: boolean,
   importMap?: ImportMap,
   importMapBaseDir?: string,
 };
@@ -23,6 +24,7 @@ export async function fastlyBuild(
     outfile,
     [
       (infile, outfile) => buildForFastlyCompute(infile, outfile, {
+        prodModules: params?.prodModules,
         importMap: params?.importMap,
         importMapBaseDir: params?.importMapBaseDir,
       }),
@@ -32,6 +34,7 @@ export async function fastlyBuild(
 }
 
 export type BuildForFastlyComputeParams = {
+  prodModules?: boolean,
   importMap?: ImportMap,
   importMapBaseDir?: string,
 };
@@ -41,10 +44,19 @@ async function buildForFastlyCompute(
   outfile: string,
   params?: BuildForFastlyComputeParams,
 ) {
+  const useProdModules = params?.prodModules ?? true;
+
+  const define: Record<string, string> = {};
+  if (useProdModules) {
+    define['process.env.NODE_ENV'] = '"production"';
+  }
+
   await esbuild.build({
     entryPoints: [infile],
     bundle: true,
     outfile,
+    define,
+    format: 'esm',
     plugins: [
       importMapEsbuildPlugin({
         importMap: params?.importMap,
@@ -55,7 +67,6 @@ async function buildForFastlyCompute(
       }),
       fastlyPlugin(),
     ],
-    format: 'esm',
   });
 }
 

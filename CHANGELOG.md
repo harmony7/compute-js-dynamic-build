@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+### Enhancements
+
+- Set process.env.NODE_ENV to "production" by default, can be unset using "prodModules" flag
+
 ## [0.2.0] - 2025-11-27
 
 ### Enhancements

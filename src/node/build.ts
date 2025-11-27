@@ -5,6 +5,7 @@ import { ImportMap } from '@h7/importmap-esbuild-plugin';
 
 export type BuildParams = {
   minify?: boolean,
+  prodModules?: boolean,
   importMap?: ImportMap,
   importMapBaseDir?: string,
 };
@@ -19,6 +20,7 @@ export async function build(
     outfile,
     [
       (infile, outfile) => fastlyBuild(infile, outfile, {
+        prodModules: params?.prodModules,
         importMap: params?.importMap,
         importMapBaseDir: params?.importMapBaseDir,
       }),
