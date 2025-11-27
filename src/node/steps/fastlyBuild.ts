@@ -6,30 +6,53 @@ import esbuild, { type Plugin } from 'esbuild';
 import MagicString from 'magic-string';
 import regexpuc from 'regexpu-core';
 import { filePipeline } from '@h7/js-async-pipeline';
+import { importMapEsbuildPlugin, ImportMap } from "@h7/importmap-esbuild-plugin";
+
+export type FastlyBuildParams = {
+  importMap?: ImportMap,
+  importMapBaseDir?: string,
+};
 
 export async function fastlyBuild(
   infile: string,
   outfile: string,
+  params?: FastlyBuildParams,
 ) {
   await filePipeline(
     infile,
     outfile,
     [
-      applyFastlyPlugin,
+      (infile, outfile) => buildForFastlyCompute(infile, outfile, {
+        importMap: params?.importMap,
+        importMapBaseDir: params?.importMapBaseDir,
+      }),
       precompileRegexes,
     ],
   );
 }
 
-async function applyFastlyPlugin(
+export type BuildForFastlyComputeParams = {
+  importMap?: ImportMap,
+  importMapBaseDir?: string,
+};
+
+async function buildForFastlyCompute(
   infile: string,
   outfile: string,
+  params?: BuildForFastlyComputeParams,
 ) {
   await esbuild.build({
     entryPoints: [infile],
     bundle: true,
     outfile,
     plugins: [
+      importMapEsbuildPlugin({
+        importMap: params?.importMap,
+        baseDir: params?.importMapBaseDir,
+        enableHttp: true,
+        timeoutMs: 30_000,
+        onLog(m) { console.log(m); },
+      }),
       fastlyPlugin(),
     ],
     format: 'esm',

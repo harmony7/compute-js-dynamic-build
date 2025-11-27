@@ -45,8 +45,8 @@
   },
   "homepage": "https://github.com/harmony7/compute-js-dynamic-build#readme",
   "dependencies": {
+    "@h7/importmap-esbuild-plugin": "^0.1.1",
     "@h7/js-async-pipeline": "^0.1.0",
-    "@h7/http-import-esbuild-plugin": "^0.1.0",
     "acorn": "^8.15.0",
     "acorn-walk": "^8.3.4",
     "esbuild": "^0.27.0",

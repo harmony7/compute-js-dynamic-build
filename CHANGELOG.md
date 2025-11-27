@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [unreleased]
 
+- Use @h7/importmap-esbuild-plugin instead of @h7/import-http-esbuild-plugin
+
 ## [0.1.1] - 2025-11-25
 
 ### Enhancements

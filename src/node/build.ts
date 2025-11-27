@@ -1,10 +1,12 @@
 import { filePipeline } from '@h7/js-async-pipeline';
-import { bundleWithHttpImports } from './steps/bundleWithHttpImports.js';
 import { fastlyBuild } from './steps/fastlyBuild.js';
 import { addLoader } from './steps/addLoader.js';
+import { ImportMap } from '@h7/importmap-esbuild-plugin';
 
 export type BuildParams = {
   minify?: boolean,
+  importMap?: ImportMap,
+  importMapBaseDir?: string,
 };
 
 export async function build(
@@ -16,9 +18,15 @@ export async function build(
     infile,
     outfile,
     [
-      bundleWithHttpImports,
-      fastlyBuild,
-      (infile, outfile) => addLoader(infile, outfile, { minify: params?.minify }),
+      (infile, outfile) => fastlyBuild(infile, outfile, {
+        importMap: params?.importMap,
+        importMapBaseDir: params?.importMapBaseDir,
+      }),
+      (infile, outfile) => addLoader(infile, outfile, {
+        minify: params?.minify,
+      }),
     ],
   );
 }
+
+export { ImportMap };
